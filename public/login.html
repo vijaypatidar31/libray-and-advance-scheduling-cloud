@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Minor project</title>
+    <title>Login</title>
 
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/6.3.1/firebase-app.js"></script>
@@ -22,7 +22,7 @@
             width: 350px;
             height: 300px;
         }
-
+        
         input {
             align-self: center;
             border-radius: 20px;
@@ -32,7 +32,7 @@
             width: 250px;
             border: 1px solid#ec3829;
         }
-
+        
         button {
             margin-top: 130px;
             border-radius: 5px;
@@ -41,7 +41,7 @@
             width: 60%;
             height: 30px;
         }
-
+        
         a {
             display: inline-block;
             margin-top: 7px;
@@ -49,30 +49,26 @@
         }
     </style>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById("btnLogin").addEventListener("click", function () {
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById("btnLogin").addEventListener("click", function() {
                 var email = document.getElementById("email").value;
                 var pass = document.getElementById("pass").value;
-                firebase.auth().signInWithEmailAndPassword(email, pass).catch(function (error) {
+                firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
                     // Handle Errors here.
                     var errorCode = error.code;
                     var errorMessage = error.message;
                     alert(errorMessage);
                     // ...
                 });
-
-                firebase.auth().onAuthStateChanged(function (currentUser1) {
-                    var user = firebase.auth().currentUser;
-
+                firebase.auth().onAuthStateChanged(function(user) {
                     if (user) {
-                        alert("already login");
-                        location.replace("https://minor-project-svce.web.app")
+                        location.replace("..");
                     }
                 });
             });
 
-        });
 
+        });
     </script>
 </head>
 
@@ -80,11 +76,11 @@
     <div style="text-align:center;margin-top:5%;">
         <div id="con">
             <input id="email" placeholder="email" type="text" />
-            <br/>
+            <br />
             <input id="pass" placeholder="password" type="password" />
-            <br/>
+            <br />
             <button id="btnLogin">LogIn</button>
-            <br/>
+            <br />
             <a href="forgot-password">forgot password</a>
         </div>
     </div>

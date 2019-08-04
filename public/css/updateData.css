@@ -1,0 +1,61 @@
+.diva1,
+#day {
+    color: black;
+    display: inline-block;
+    margin-left: 12px;
+    width: 114px;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 13px;
+}
+
+.diva {
+    margin-top: 17px;
+    margin-left: 58px;
+    width: 117px;
+    height: 24px;
+    border-radius: 5px;
+    background-color: #f1f1ec;
+    text-align: center;
+}
+
+#con1 {
+    width: 950px;
+    background-color: #ffffff;
+    margin-top: 20px;
+    border-radius: 20px;
+    display: inline-block;
+    text-align: center;
+}
+
+#con2 {
+    width: 950px;
+    background-color: #ffffff;
+    margin-top: 20px;
+    display: inline-block;
+    border-radius: 20px;
+}
+
+button {
+    border-radius: 9px;
+    width: 123px;
+    height: 33px;
+    margin-top: 4px;
+    background-color: lightgreen;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+textarea {
+    margin-bottom: 10px;
+    margin-left: 12px;
+    width: 111px;
+    height: 33px;
+    border-radius: 5px;
+    background-color: #f1f1ec;
+    text-align: center;
+}
+
+body {
+    background-color: #f1f1ec;
+}
