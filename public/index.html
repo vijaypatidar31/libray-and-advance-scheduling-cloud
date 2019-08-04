@@ -21,11 +21,11 @@
 
     <div class="sidenav">
         <span>Lecture Schedule</span>
-        <a href="update-data.html">Time Table</a>
-        <a href="#timing">Timing</a>
-        <a href="#events">Events</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        <a target="targetFrame" href="update-data.html">Time Table</a>
+        <a target="targetFrame" href="#timing">Timing</a>
+        <a target="targetFrame" href="#events">Events</a>
+        <a target="targetFrame" href="#about">About</a>
+        <a target="targetFrame" href="#contact">Contact</a>
     </div>
 
     <div class="main">
@@ -34,10 +34,7 @@
             <img id="log_in_out" src="image/login_icon.png" alt="login_out_icon" />
             <span id="hint_user">test</span>
         </div>
-
-
-        <h2>Sidebar</h2>
-        <iframe width="100%" height="1000" allowTransparency="true" scrolling="yes" frameborder="0">
+        <iframe src="main_content.html" width="100%" height="1000" contenteditable="true" name="targetFrame" allowTransparency="true" scrolling="yes" frameborder="0">
         </iframe>
     </div>
 </body>

@@ -21,22 +21,15 @@
     <div style="width: 100%;text-align: center">
         <div id="con1">
             <select class="diva" id="year">
-                <option>first</option>
-                <option>second</option>
-                <option>third</option>
-                <option>fourth</option>
+                <option>select year</option>
             </select>
 
             <select class="diva" id="branch">
-                <option>cs1</option>
-                <option>it</option>
-                <option>cs2</option>
-                <option>ce</option>
+                <option>select branch</option>
             </select>
 
             <select class="diva" id="batch">
-                <option>b1</option>
-                <option>b2</option>
+                <option>select batch</option>
             </select>
 
             <select class="diva" id="type">
@@ -47,22 +40,30 @@
             <br />
             <button onclick="fetch()">Fetch Data</button>
         </div>
+        <br/>
         <div id="con2">
-            <p id="day">FROM</p>
-            <p id="day">MONDAY</p>
-            <p id="day">TUESDAY</p>
-            <p id="day">WEDNESDAY</p>
-            <p id="day">THURSDAY</p>
-            <p id="day">FRIDAY</p>
-            <p id="day">SATURDAY</p>
-            <div class="diva1" id="from"></div>
-            <div class="diva1" id="day1"></div>
-            <div class="diva1" id="day2"></div>
-            <div class="diva1" id="day3"></div>
-            <div class="diva1" id="day4"></div>
-            <div class="diva1" id="day5"></div>
-            <div class="diva1" id="day6"></div>
-
+            <div class="diva1" id="from">
+                <p id="day">FROM</p>
+            </div>
+            <div class="diva1" id="day1">
+                <p id="day">MONDAY</p>
+            </div>
+            <div class="diva1" id="day2">
+                <p id="day">TUESDAY</p>
+            </div>
+            <div class="diva1" id="day3">
+                <p id="day">WEDNESDAY</p>
+            </div>
+            <div class="diva1" id="day4">
+                <p id="day">THURSDAY</p>
+            </div>
+            <div class="diva1" id="day5">
+                <p id="day">FRIDAY</p>
+            </div>
+            <div class="diva1" id="day6">
+                <p id="day">SATURDAY</p>
+            </div>
+            <br/>
             <button onclick="upload()">Sumbit</button>
         </div>
 
@@ -70,186 +71,7 @@
 
 
 
-
-    <script>
-        window.onload = function() {
-
-
-
-
-            for (var a = 0; a < 9; a++) {
-
-                //text to link with textarea
-                if (a != 8) {
-                    var node1 = document.createTextNode("");
-                    var node2 = document.createTextNode("");
-                    var node3 = document.createTextNode("");
-                    var node4 = document.createTextNode("");
-                    var node5 = document.createTextNode("");
-                    var node6 = document.createTextNode("");
-
-                } else {
-                    var node1 = document.createTextNode("Leave it");
-                    var node2 = document.createTextNode("Leave it");
-                    var node3 = document.createTextNode("Leave it");
-                    var node4 = document.createTextNode("Leave it");
-                    var node5 = document.createTextNode("Leave it");
-                    var node6 = document.createTextNode("Leave it");
-
-                }
-                var nodefrom = document.createTextNode("");
-
-
-
-                var pfrom = document.createElement("textarea");
-                pfrom.setAttribute('Id', "t" + getId(0, a));
-                pfrom.appendChild(nodefrom);
-
-                var p1 = document.createElement("textarea");
-                p1.setAttribute('Id', getId(1, a));
-                p1.appendChild(node1);
-
-                var p2 = document.createElement("textarea");
-                p2.setAttribute('Id', getId(2, a));
-                p2.appendChild(node2);
-
-                var p3 = document.createElement("textarea");
-                p3.setAttribute('Id', getId(3, a));
-                p3.appendChild(node3);
-
-                var p4 = document.createElement("textarea");
-                p4.setAttribute('Id', getId(4, a));
-                p4.appendChild(node4);
-
-                var p5 = document.createElement("textarea");
-                p5.setAttribute('Id', getId(5, a));
-                p5.appendChild(node5);
-
-                var p6 = document.createElement("textarea");
-                p6.setAttribute('Id', getId(6, a));
-                p6.appendChild(node6);
-
-
-
-                var div1 = document.getElementById("day1");
-
-                var div2 = document.getElementById("day2");
-
-                var div3 = document.getElementById("day3");
-
-                var div4 = document.getElementById("day4");
-
-                var div5 = document.getElementById("day5");
-
-                var div6 = document.getElementById("day6");
-
-                var divfrom = document.getElementById("from");
-
-                //adding the paragraph to the div
-
-                div1.appendChild(p1);
-                div2.appendChild(p2);
-                div3.appendChild(p3);
-                div4.appendChild(p4);
-                div6.appendChild(p6);
-                div5.appendChild(p5);
-                from.appendChild(pfrom);
-
-                fetchTimingData();
-            }
-
-
-        };
-
-        function getId(day, lec) {
-            // console.log("id == " + "day" + day + "lec" + lec);
-            return "day" + day + "lec" + lec;
-        }
-
-        function upload() {
-
-            var collage = "svce";
-            var branch = document.getElementById("branch").value;
-            var batch = document.getElementById("batch").value;
-            var year = document.getElementById("year").value;
-            var type = document.getElementById("type").value;
-
-            var dataroot = "/collage/" + collage + "/year/" + year + "/branch/" + branch + "/batch";
-
-            var db = firebase.firestore();
-            var docData = {};
-            for (d = 1; d < 7; d++) {
-                for (l = 0; l < 9; l++) {
-                    var key = getId(d, l);
-                    var value = document.getElementById(key).value;
-                    docData[key] = value;
-                }
-            }
-            db.collection(dataroot).doc(batch).get().then(function(doc) {
-                console.log("Current data: ", doc.data());
-                var upload = {};
-                if (doc.exists) upload = doc.data();
-
-                upload[type] = docData;
-                db.collection(dataroot).doc(batch).set(upload).then(function() {
-                    console.log("Document successfully written!");
-                    alert("success");
-                });
-            });
-
-
-
-
-        }
-
-        function fetch() {
-            var collage = "svce";
-            var branch = document.getElementById("branch").value;
-            var batch = document.getElementById("batch").value;
-            var year = document.getElementById("year").value;
-            var type = document.getElementById("type").value;
-
-
-
-            var dataroot = "/collage/" + collage + "/year/" + year + "/branch/" + branch + "/batch";
-
-            var db = firebase.firestore();
-            var docData = {};
-
-            db.collection(dataroot).doc(batch).get().then(function(doc) {
-                console.log("Current data: ", doc.data());
-                var upload = doc.data();
-                docData = upload[type];
-                for (d = 1; d < 7; d++) {
-                    for (l = 0; l < 9; l++) {
-                        var key = getId(d, l);
-                        var value = docData[key];
-                        document.getElementById(getId(d, l)).innerHTML = value;
-                    }
-                }
-            });
-        }
-
-        function fetchTimingData() {
-
-            var collage = "svce";
-
-
-            var dataroot = "/collage/" + collage + "/other/";
-
-            var db = firebase.firestore();
-
-            db.collection(dataroot).doc("time").get().then(function(doc) {
-                console.log("Current data: ", doc.data());
-                var upload = doc.data().time;
-                for (d = 0; d < 9; d++) {
-                    var key = getId(0, d);
-                    var value = upload[d];
-                    document.getElementById("t" + key).innerHTML = value;
-                    document.getElementById("t" + key).readOnly = true;
-                }
-            });
-        }
+    <script src="js/update-data.js">
     </script>
 
 </body>
