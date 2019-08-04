@@ -1,0 +1,377 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
+  
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/6.3.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/6.3.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/6.3.1/firebase-database.js"></script>
+    <script defer src="/__/firebase/6.3.1/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/6.3.1/firebase-storage.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+    
+</head>
+<body>
+    <div id="con1">
+        <select class="diva" id="collage">
+            <option>svce</option>
+            <option>mit</option>
+        </select>
+
+        <select class="diva" id="year">
+            <option>first_year</option>
+            <option>second_year</option>
+            <option>third_year</option>
+            <option>fourth_year</option>
+        </select>
+
+        <select class="diva" id="branch">
+            <option>cs1</option>
+            <option>it</option>
+            <option>cs2</option>
+            <option>ce</option>
+        </select>
+
+        <select class="diva" id="batch">
+            <option>b1</option>
+            <option>b2</option>
+        </select>
+
+        <select class="diva" id="type">
+            <option>subject</option>
+            <option>faculty</option>
+            <option>room</option>
+        </select>
+        <br />
+        <button onclick="fetch()">Fetch Data</button>
+    </div>
+    <div id="con2">
+        <p id="day">FROM</p>
+        <p id="day">MONDAY</p>
+        <p id="day">TUESDAY</p>
+        <p id="day">WEDNESDAY</p>
+        <p id="day">THURSDAY</p>
+        <p id="day">FRIDAY</p>
+        <p id="day">SATURDAY</p>
+        <div class="diva1" id="from"></div>
+        <div class="diva1" id="day1"></div>
+        <div class="diva1" id="day2"></div>
+        <div class="diva1" id="day3"></div>
+        <div class="diva1" id="day4"></div>
+        <div class="diva1" id="day5"></div>
+        <div class="diva1" id="day6"></div>
+
+        <button onclick="upload()">Sumbit</button>
+    </div>
+
+
+    <script type="text/javascript">
+        window.onload = function () {
+
+
+
+
+            for (var a = 0; a < 9; a++) {
+
+                //text to link with textarea
+                if (a != 8) {
+                    var node1 = document.createTextNode("");
+                    var node2 = document.createTextNode("");
+                    var node3 = document.createTextNode("");
+                    var node4 = document.createTextNode("");
+                    var node5 = document.createTextNode("");
+                    var node6 = document.createTextNode("");
+
+                } else {
+                    var node1 = document.createTextNode("Leave it");
+                    var node2 = document.createTextNode("Leave it");
+                    var node3 = document.createTextNode("Leave it");
+                    var node4 = document.createTextNode("Leave it");
+                    var node5 = document.createTextNode("Leave it");
+                    var node6 = document.createTextNode("Leave it");
+
+                }
+                var nodefrom = document.createTextNode("");
+
+
+                var p1 = document.createElement("textarea");
+                p1.setAttribute('Id', getId(1, a));
+                p1.appendChild(node1);
+
+                var pfrom = document.createElement("textarea");
+                pfrom.setAttribute('Id', "t" + getId(0, a));
+                pfrom.appendChild(nodefrom);
+
+                var p2 = document.createElement("textarea");
+                p2.setAttribute('Id', getId(2, a));
+                p2.appendChild(node2);
+
+                var p3 = document.createElement("textarea");
+                p3.setAttribute('Id', getId(3, a));
+                p3.appendChild(node3);
+
+                var p4 = document.createElement("textarea");
+                p4.setAttribute('Id', getId(4, a));
+                p4.appendChild(node4);
+
+                var p5 = document.createElement("textarea");
+                p5.setAttribute('Id', getId(5, a));
+                p5.appendChild(node5);
+
+                var p6 = document.createElement("textarea");
+                p6.setAttribute('Id', getId(6, a));
+                p6.appendChild(node6);
+
+
+
+                var div1 = document.getElementById("day1");
+
+                var div2 = document.getElementById("day2");
+
+                var div3 = document.getElementById("day3");
+
+                var div4 = document.getElementById("day4");
+
+                var div5 = document.getElementById("day5");
+
+                var div6 = document.getElementById("day6");
+
+                var divfrom = document.getElementById("from");
+
+                //adding the paragraph to the div
+
+                div1.appendChild(p1);
+                div2.appendChild(p2);
+                div3.appendChild(p3);
+                div4.appendChild(p4);
+                div6.appendChild(p6);
+                div5.appendChild(p5);
+                from.appendChild(pfrom);
+
+
+
+
+
+
+            }
+
+
+        };
+        function getId(day, lec) {
+            return "day" + day + "lec" + lec;
+        }
+
+    </script>
+
+    <style type="text/css">
+        .diva1,
+        #day {
+            color: black;
+            display: inline-block;
+            margin-left: 12px;
+            width: 114px;
+            text-align: center;
+            font-weight: bolder;
+            font-size: 13px;
+
+        }
+
+        .diva {
+            margin-top: 17px;
+            margin-left: 58px;
+            width: 117px;
+            height: 24px;
+            border-radius: 5px;
+            background-color: yellow;
+            text-align: center;
+
+        }
+
+        #con1 {
+            width: 950px;
+            background-color: orange;
+            margin-top: 20px;
+            border-radius: 20px;
+        }
+
+        #con2 {
+            width: 950px;
+            background-color: orange;
+            margin-top: 20px;
+            border-radius: 20px;
+
+        }
+
+        button {
+            border-radius: 9px;
+            width: 123px;
+            height: 33px;
+            margin-top: 4px;
+            background-color: lightgreen;
+            margin-left: 411px;
+            margin-bottom: 20px;
+
+
+        }
+
+        textarea {
+            margin-bottom: 10px;
+            margin-left: 12px;
+            width: 111px;
+            height: 33px;
+            border-radius: 5px;
+            background-color: yellow;
+            text-align: center;
+
+        }
+    </style>
+    <html>
+
+
+    
+    <script>
+        function upload() {
+            var
+            dbla = document.getElementById("dbla").value; var
+                dblb = document.getElementById("dblb").value; var dblc = document.getElementById("dblc").value; var dbld = document.getElementById("dbld").value; var dble = document.getElementById("dble").value; var dblf = document.getElementById("dblf").value; var dblg = document.getElementById("dblg").value; var dblh = document.getElementById("dblh").value; var dcla = document.getElementById("dcla").value; var dclb = document.getElementById("dclb").value; var dclc = document.getElementById("dclc").value; var dcld = document.getElementById("dcld").value; var dcle = document.getElementById("dcle").value; var dclf = document.getElementById("dclf").value; var dclg = document.getElementById("dclg").value; var dclh = document.getElementById("dclh").value; var ddla = document.getElementById("ddla").value; var ddlb = document.getElementById("ddlb").value; var ddlc = document.getElementById("ddlc").value; var ddld = document.getElementById("ddld").value; var ddle = document.getElementById("ddle").value; var ddlf = document.getElementById("ddlf").value; var ddlg = document.getElementById("ddlg").value; var ddlh = document.getElementById("ddlh").value; var dela = document.getElementById("dela").value; var delb = document.getElementById("delb").value; var delc = document.getElementById("delc").value; var deld = document.getElementById("deld").value; var dele = document.getElementById("dele").value; var delf = document.getElementById("delf").value; var delg = document.getElementById("delg").value; var delh = document.getElementById("delh").value; var dfla = document.getElementById("dfla").value; var dflb = document.getElementById("dflb").value; var dflc = document.getElementById("dflc").value; var dfld = document.getElementById("dfld").value; var dfle = document.getElementById("dfle").value; var dflf = document.getElementById("dflf").value; var dflg = document.getElementById("dflg").value; var dflh = document.getElementById("dflh").value;
+            dgla = document.getElementById("dgla").value; var dglb = document.getElementById("dglb").value; var dglc = document.getElementById("dglc").value; var dgld = document.getElementById("dgld").value; var dgle = document.getElementById("dgle").value; var dglf = document.getElementById("dglf").value; var dglg = document.getElementById("dglg").value; var dglh = document.getElementById("dglh").value;
+
+            //timing var
+            var tdala = document.getElementById("tdala").value;
+            var tdalb = document.getElementById("tdalb").value;
+            var tdalc = document.getElementById("tdalc").value;
+            var tdald = document.getElementById("tdald").value;
+            var tdale = document.getElementById("tdale").value;
+            var tdalf = document.getElementById("tdalf").value;
+            var tdalg = document.getElementById("tdalg").value;
+            var tdalh = document.getElementById("tdalh").value;
+            var tdali = document.getElementById("tdali").value;
+
+
+            var collage = document.getElementById("collage").value;
+            var branch = document.getElementById("branch").value;
+            var batch = document.getElementById("batch").value;
+            var year = document.getElementById("year").value;
+            var type = document.getElementById("type").value;
+
+            var dataroot = "/collage/" + collage + "/" + year + "/" + branch + "/" + batch;
+            var datarootForOtherData = "/collage/" + collage + "/OTHER_DATA";
+
+            var db = firebase.firestore();
+            var docData = {
+                dala: "Sunday",
+                dalb: "Sunday",
+                dalc: "Sunday",
+                dald: "Sunday",
+                dale: "Sunday",
+                dalf: "Sunday",
+                dalg: "Sunday",
+                dalh: "Sunday",
+                dbla: dbla,
+                dblb: dblb,
+                dblc: dblc,
+                dbld: dbld,
+                dble: dble,
+                dblf: dblf,
+                dblg: dblg,
+                dblh: dblh,
+                dcla: dcla,
+                dclb: dclb,
+                dclc: dclc,
+                dcld: dcld,
+                dcle: dcle,
+                dclf: dclf,
+                dclg: dclg,
+                dclh: dclh, ddla: ddla, ddlb: ddlb, ddlc: ddlc, ddld: ddld, ddle: ddle, ddlf: ddlf, ddlg: ddlg, ddlh: ddlh, dela: dela, delb: delb, delc: delc, deld: deld, dele: dele, delf: delf, delg: delg, delh: delh, dfla: dfla, dflb: dflb, dflc: dflc, dfld: dfld, dfle: dfle, dflf: dflf, dflg: dflg, dflh: dflh, dgla: dgla, dglb: dglb, dglc: dglc, dgld: dgld, dgle: dgle, dglf: dglf, dglg: dglg, dglh: dglh
+
+            };
+
+            var tDocData = {
+                dala: tdala,
+                dalb: tdalb,
+                dalc: tdalc,
+                dald: tdald,
+                dale: tdale,
+                dalf: tdalf,
+                dalg: tdalg,
+                dalh: tdalh,
+                dali: tdali,
+                TOTAL_NUMBER_OF_LECTURE: "8",
+                googleAds: "0"
+            }
+            db.collection(dataroot).doc(type).set(docData).then(function () {
+                console.log("Document successfully written!");
+                alert("success");
+            });
+
+            db.collection(datarootForOtherData).doc("timing").set(tDocData).then(function () {
+                console.log("Document successfully written!");
+            });
+
+        }
+    </script>
+
+    <script type="text/javascript">
+
+        function fetch() {
+
+            var collage = document.getElementById("collage").value;
+            var branch = document.getElementById("branch").value;
+            var batch = document.getElementById("batch").value;
+            var year = document.getElementById("year").value;
+            var type = document.getElementById("type").value;
+            var dataroot = "/collage/" + collage + "/" + year + "/" + branch + "/" + batch;
+            var datarootForOtherData = "/collage/" + collage + "/OTHER_DATA";
+
+            db = firebase.firestore();
+
+            var ldocRef = db.collection(dataroot).doc(type);
+            var tdocRef = db.collection(datarootForOtherData).doc("timing");
+            console.log(tdocRef);
+
+            ldocRef.get().then(function (doc) {
+                if (doc.exists) {
+                    console.log("Document data:", doc.data());
+                    document.getElementById("dbla").innerHTML = doc.data().dbla; document.getElementById("dblb").innerHTML = doc.data().dblb; document.getElementById("dblc").innerHTML = doc.data().dblc; document.getElementById("dbld").innerHTML = doc.data().dbld; document.getElementById("dble").innerHTML = doc.data().dble; document.getElementById("dblf").innerHTML = doc.data().dblf; document.getElementById("dblg").innerHTML = doc.data().dblg; document.getElementById("dblh").innerHTML = doc.data().dblh; document.getElementById("dcla").innerHTML = doc.data().dcla; document.getElementById("dclb").innerHTML = doc.data().dclb; document.getElementById("dclc").innerHTML = doc.data().dclc; document.getElementById("dcld").innerHTML = doc.data().dcld; document.getElementById("dcle").innerHTML = doc.data().dcle; document.getElementById("dclf").innerHTML = doc.data().dclf; document.getElementById("dclg").innerHTML = doc.data().dclg; document.getElementById("dclh").innerHTML = doc.data().dclh; document.getElementById("ddla").innerHTML = doc.data().ddla; document.getElementById("ddlb").innerHTML = doc.data().ddlb; document.getElementById("ddlc").innerHTML = doc.data().ddlc; document.getElementById("ddld").innerHTML = doc.data().ddld; document.getElementById("ddle").innerHTML = doc.data().ddle; document.getElementById("ddlf").innerHTML = doc.data().ddlf; document.getElementById("ddlg").innerHTML = doc.data().ddlg; document.getElementById("ddlh").innerHTML = doc.data().ddlh; document.getElementById("dela").innerHTML = doc.data().dela; document.getElementById("delb").innerHTML = doc.data().delb; document.getElementById("delc").innerHTML = doc.data().delc; document.getElementById("deld").innerHTML = doc.data().deld; document.getElementById("dele").innerHTML = doc.data().dele; document.getElementById("delf").innerHTML = doc.data().delf; document.getElementById("delg").innerHTML = doc.data().delg; document.getElementById("delh").innerHTML = doc.data().delh; document.getElementById("dfla").innerHTML = doc.data().dfla; document.getElementById("dflb").innerHTML = doc.data().dflb; document.getElementById("dflc").innerHTML = doc.data().dflc; document.getElementById("dfld").innerHTML = doc.data().dfld; document.getElementById("dfle").innerHTML = doc.data().dfle; document.getElementById("dflf").innerHTML = doc.data().dflf; document.getElementById("dflg").innerHTML = doc.data().dflg; document.getElementById("dflh").innerHTML = doc.data().dflh; document.getElementById("dgla").innerHTML = doc.data().dgla; document.getElementById("dglb").innerHTML = doc.data().dglb; document.getElementById("dglc").innerHTML = doc.data().dglc; document.getElementById("dgld").innerHTML = doc.data().dgld; document.getElementById("dgle").innerHTML = doc.data().dgle; document.getElementById("dglf").innerHTML = doc.data().dglf; document.getElementById("dglg").innerHTML = doc.data().dglg; document.getElementById("dglh").innerHTML = doc.data().dglh;
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+            }).catch(function (error) {
+                console.log("Error getting document:", error);
+            });
+
+
+            tdocRef.get().then(function (doc) {
+                if (doc.exists) {
+                    console.log("Document data:", doc.data());
+                    document.getElementById("tdala").innerHTML = doc.data().dala;
+                    document.getElementById("tdalb").innerHTML = doc.data().dalb;
+                    document.getElementById("tdalc").innerHTML = doc.data().dalc;
+                    document.getElementById("tdald").innerHTML = doc.data().dald;
+                    document.getElementById("tdale").innerHTML = doc.data().dale;
+                    document.getElementById("tdalf").innerHTML = doc.data().dalf;
+                    document.getElementById("tdalg").innerHTML = doc.data().dalg;
+                    document.getElementById("tdalh").innerHTML = doc.data().dalh;
+                    document.getElementById("tdali").innerHTML = doc.data().dali;
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+            }).catch(function (error) {
+                console.log("Error getting document:", error);
+            });
+
+
+        }
+
+    </script>
+
+    </html>
+</body>
+
+</html>
