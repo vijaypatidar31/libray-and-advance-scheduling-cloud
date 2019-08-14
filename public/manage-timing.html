@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Manage timing
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/6.3.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/6.3.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/6.3.1/firebase-firestore.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+    <link href="css/manage-timing.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+    <div id="container">
+        <div id="conFrom" class="conFrom">
+            <p>FROM</p>
+        </div>
+        <div class="conTo" id="conTo">
+            <p>To</p>
+        </div>
+        <br/>
+        <div>
+            <button onclick="removeLast()">remove last</button>
+            <button onclick="addNew()">add new</button>
+        </div>
+        <button onclick="saveTimeData()">Update Timing</button>
+    </div>
+    <script src="js/manage-timing.js"></script>
+</body>
+
+</html>

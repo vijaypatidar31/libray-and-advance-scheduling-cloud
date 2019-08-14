@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
     //addding listener
     document.getElementById("log_in_out").addEventListener("click", function() {
         if (!isLogIn) {
-            alert("redirecting to login page");
             location.replace("login.html");
         } else {
             firebase.auth().signOut().then(function() {

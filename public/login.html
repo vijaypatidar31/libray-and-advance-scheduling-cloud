@@ -13,46 +13,99 @@
     <!-- initialize the SDK after all desired features are loaded -->
     <script defer src="/__/firebase/init.js"></script>
 
-    <style>
-        #con {
-            display: inline-block;
-            background-color: #26f5d6;
-            border: 1px solid #08ca77;
-            border-radius: 20PX;
-            width: 350px;
-            height: 300px;
-        }
-        
-        input {
-            align-self: center;
-            border-radius: 20px;
-            margin-top: 15px;
-            height: 25px;
-            text-align: center;
-            width: 250px;
-            border: 1px solid#ec3829;
-        }
-        
-        button {
-            margin-top: 130px;
-            border-radius: 5px;
-            border: 1px solid #ec3829;
-            background: #26f5d6;
-            width: 60%;
-            height: 30px;
-        }
-        
-        a {
-            display: inline-block;
-            margin-top: 7px;
-            align-self: baseline;
-        }
-    </style>
+
+</head>
+<style>
+    body {
+        text-align: center;
+        background-color: #ffffff;
+    }
+    
+    img {
+        width: 70px;
+        height: 70px;
+    }
+    
+    p {
+        font-size: 25px;
+    }
+    
+    #container_main {
+        width: 448px;
+        height: 500px;
+        padding: 20px;
+        border: 1px solid #dadce0;
+        display: inline-block;
+        border-radius: 10px;
+        margin: 50px;
+    }
+    
+    input {
+        width: 408px;
+        height: 50px;
+        margin: 5px;
+        padding-left: 15px;
+        border-radius: 5px;
+        border: .5px solid #dadce0;
+    }
+    
+    .btnLogin,
+    .btnCreate,
+    #btnForgot {
+        border: 0px;
+        display: inline;
+    }
+    
+    .btnLogin {
+        width: 180px;
+        color: #ffffff;
+        background-color: #1a73e8;
+        float: right;
+        margin-right: 14px;
+    }
+    
+    .btnCreate,
+    #btnForgot {
+        width: 100px;
+        float: left;
+        color: #1a73e8;
+        background-color: #ffffff;
+        padding-left: 0px;
+        margin-left: 12px;
+    }
+    
+    #sub_con {
+        margin-top: 100px;
+    }
+    
+    a {
+        color: inherit;
+        text-decoration: inherit;
+    }
+</style>
+
+<body>
+    <div id="container_main">
+        <img src="image/login-page-icon.png" />
+        <a href="..">
+            <p>Lecture Scheduling</p>
+        </a>
+        <input id="email" type="email" placeholder="email" />
+        <br/>
+        <input id="password" type="password" placeholder="password" />
+        <br/>
+        <input id="btnForgot" type="submit" value="forgot password" />
+        <div id="sub_con">
+            <input class="btnCreate" id="btnCreate" type="submit" value="create account" />
+            <input class="btnLogin" id="btnLogin" type="submit" value="LogIn" />
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById("btnLogin").addEventListener("click", function() {
                 var email = document.getElementById("email").value;
-                var pass = document.getElementById("pass").value;
+                var pass = document.getElementById("password").value;
                 firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
                     // Handle Errors here.
                     var errorCode = error.code;
@@ -67,25 +120,17 @@
                 });
             });
 
-
+            document.getElementById("btnForgot").addEventListener("click", function() {
+                var passwordResetEmail = document.getElementById("email").value;
+                firebase.auth().sendPasswordResetEmail(passwordResetEmail)
+                    .then(() => {
+                        window.alert('Password reset email sent to ' + passwordResetEmail + ', check your inbox.');
+                    }).catch((error) => {
+                        window.alert(error)
+                    })
+            });
         });
     </script>
-</head>
-
-<body>
-    <div style="text-align:center;margin-top:5%;">
-        <div id="con">
-            <input id="email" placeholder="email" type="text" />
-            <br />
-            <input id="pass" placeholder="password" type="password" />
-            <br />
-            <button id="btnLogin">LogIn</button>
-            <br />
-            <a href="forgot-password">forgot password</a>
-        </div>
-    </div>
-
-
 
 </body>
 
