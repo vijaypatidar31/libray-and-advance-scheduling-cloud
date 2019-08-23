@@ -17,21 +17,26 @@
     <!-- initialize the SDK after all desired features are loaded -->
     <script defer src="/__/firebase/init.js"></script>
     <link href="css/manage-timing.css" rel="stylesheet" type="text/css" />
-
+    <script src="js/canvasjs.min.js"></script>
+    <style>
+        #con {
+            border-radius: 20px;
+            background-color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="container">
-        <div id="conFrom" class="conFrom">
-            <p>FROM</p>
-        </div>
-        <br/>
-        <button onclick="removeLast()">remove last</button><br/>
-        <button onclick="addNew()">add new</button><br/>
-        <button onclick="saveTimeData()">Update Timing</button>
-
+    <div id="con">
+        <div id="chartContainerMonth" style="height: 300px; width: 100%;"></div>
     </div>
-    <script src="js/manage-timing.js"></script>
+    <br/>
+    <div id="con">
+        <div id="chartContainerYear" style="height: 300px; width: 100%;"></div>
+    </div>
+    <script src="js/dashboard-analitics.js"></script>
 </body>
 
 </html>

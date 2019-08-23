@@ -11,10 +11,12 @@
     <script defer src="/__/firebase/6.3.1/firebase-app.js"></script>
     <!-- include only the Firebase features as you need -->
     <script defer src="/__/firebase/6.3.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/6.3.1/firebase-firestore.js"></script>
     <!-- initialize the SDK after all desired features are loaded -->
     <script defer src="/__/firebase/init.js"></script>
     <script src="js/index.js"></script>
     <link rel="stylesheet" type="text/css" href="css/index.css" />
+
 </head>
 
 <body>
@@ -23,7 +25,9 @@
         <span>Lecture Schedule</span>
         <a target="targetFrame" href="update-data.html">Time Table</a>
         <a target="targetFrame" href="manage-timing.html">Timing</a>
-        <a target="targetFrame" href="#events">Events</a>
+        <a target="targetFrame" href="submit-issued-book.html">Submit Book</a>
+        <a target="targetFrame" href="add-new-book.html">Add new book</a>
+        <a target="targetFrame" href="new-student-account.html">Create account</a>
         <a target="targetFrame" href="#about">About</a>
         <a target="targetFrame" href="#contact">Contact</a>
     </div>
@@ -34,7 +38,7 @@
             <img id="log_in_out" src="image/login_icon.png" alt="login_out_icon" />
             <span id="hint_user">test</span>
         </div>
-        <iframe src="main_content.html" width="100%" height="1000" contenteditable="true" name="targetFrame" allowTransparency="true" scrolling="yes" frameborder="0">
+        <iframe src="dashboard-analitics.html" width="100%" height="1000" contenteditable="true" name="targetFrame" allowTransparency="true" scrolling="yes" frameborder="0">
         </iframe>
     </div>
 </body>

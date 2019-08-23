@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Create Student Account
+    </title>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/6.3.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/6.3.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/6.3.1/firebase-firestore.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+    <style>
+        html {
+            background-color: #eceff1;
+            text-align: center;
+        }
+        
+        td {
+            padding: 10px;
+            height: 30px;
+            width: 300px;
+            background-color: #ffffff;
+        }
+        
+        th,
+        tr :last-child {
+            border-radius: 20px;
+        }
+        
+        tr :last-child {
+            width: 100px;
+            height: 30px;
+            padding: 10px;
+            background-color: #039be5;
+            color: #ffffff;
+        }
+        
+        .field {
+            padding: 10px;
+            height: 50px;
+            width: 300px;
+            color: antiquewhite;
+            background-color: #039be5;
+            font-size: 30px;
+        }
+        
+        table {
+            background-color: #f1f1ec;
+            display: inline-block;
+        }
+        
+        div {
+            display: inline-block;
+            margin: 30px;
+        }
+        
+        div button {
+            border-radius: 9px;
+            background-color: #039be5;
+            color: #ffffff;
+            font-size: 20px;
+            padding: 5px 30px 5px 30px;
+            display: inline-block;
+        }
+        
+        .diva {
+            margin: 17px;
+            width: 117px;
+            height: 24px;
+            border-radius: 5px;
+            background-color: #eceff1;
+            text-align: center;
+        }
+        
+        #con1,
+        #students {
+            background-color: #ffffff;
+            margin: 10px;
+            width: 700px;
+            border-radius: 20px;
+            border: 1px solid #d2d2d2;
+            display: inline-block;
+            text-align: center;
+            padding: 10px;
+        }
+        
+        td {
+            border: 1.5px solid #d2d2d2;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="con1">
+        <select class="diva" id="year">
+            <option>select year</option>
+        </select>
+
+        <select class="diva" id="branch">
+            <option>select branch</option>
+        </select>
+
+        <select class="diva" id="batch">
+            <option>select batch</option>
+        </select>
+    </div>
+    <br/>
+    <table id="students">
+        <tr>
+            <th class="field">Name</th>
+            <th class="field">Email</th>
+            <th class="removeBtn">Delete</th>
+        </tr>
+
+        <tr>
+            <td contenteditable='true'></td>
+            <td contenteditable='true'></td>
+            <td onclick="deleteRow(1)">remove</td>
+        </tr>
+    </table>
+    <br/>
+    <div>
+        <button onclick="addRow()">Add Student</button>
+        <button onclick="CreateAccount()">Create Account</button>
+    </div>
+    <script src="js/create-student.js"></script>
+</body>
+
+</html>

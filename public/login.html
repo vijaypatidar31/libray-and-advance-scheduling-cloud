@@ -12,6 +12,8 @@
     <script defer src="/__/firebase/6.3.1/firebase-auth.js"></script>
     <!-- initialize the SDK after all desired features are loaded -->
     <script defer src="/__/firebase/init.js"></script>
+    <script defer src="/__/firebase/6.3.1/firebase-firestore.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
 
 
 </head>
@@ -62,6 +64,7 @@
         background-color: #1a73e8;
         float: right;
         margin-right: 14px;
+        border: 1px solid #1a73e8;
     }
     
     .btnCreate,
@@ -102,20 +105,29 @@
     </div>
 
     <script>
+        var Admin = {};
+        var UID = "";
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById("btnLogin").addEventListener("click", function() {
+                document.getElementById("btnLogin").style.color = "#1a73e8";
+                document.getElementById("btnLogin").style.backgroundColor = "#ffffff";
                 var email = document.getElementById("email").value;
                 var pass = document.getElementById("password").value;
                 firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
                     // Handle Errors here.
                     var errorCode = error.code;
                     var errorMessage = error.message;
+
+                    document.getElementById("btnLogin").style.backgroundColor = "#1a73e8";
+                    document.getElementById("btnLogin").style.color = "#ffffff";
                     alert(errorMessage);
                     // ...
                 });
                 firebase.auth().onAuthStateChanged(function(user) {
                     if (user) {
-                        location.replace("..");
+                        UID = user.uid;
+                        fetchAdminData();
+                        // location.replace("..");
                     }
                 });
             });
@@ -130,6 +142,20 @@
                     })
             });
         });
+
+        function fetchAdminData() {
+            var db = firebase.firestore();
+            db.collection("admins").doc(UID).get().then(function(doc) {
+                console.log("Admin data: ", doc.data());
+                if (doc.data()) {
+                    ADMIN = doc.data();
+                    collage = ADMIN.collage;
+                    location.replace("..");
+                } else {
+                    firebase.auth().signOut();
+                }
+            });
+        }
     </script>
 
 </body>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Add new book
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/6.3.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/6.3.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/6.3.1/firebase-firestore.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+    <style>
+        #container {
+            background-color: #FFFFFF;
+            margin: 10px;
+            padding: 100px;
+            border-radius: 20px;
+            border: 1px solid #d2d2d2;
+            text-align: center;
+            padding: 10px;
+        }
+        
+        input,
+        textarea {
+            display: inline-block;
+            width: 350px;
+            height: 30px;
+            text-align: center;
+            font-size: 16px;
+            padding: 5px;
+            border: 1px solid #d2d2d2;
+            border-radius: 10px;
+            margin: 5px;
+        }
+        
+        #barcodes {
+            height: 120px;
+        }
+        
+        button {
+            border-radius: 9px;
+            margin-top: 4px;
+            background-color: #039be5;
+            color: #ffffff;
+            margin: 20px;
+            font-size: 23px;
+            padding: 5px 30px 5px 30px;
+            display: inline-block;
+        }
+        
+        body {
+            text-align: center;
+        }
+        
+        html {
+            background-color: #eceff1;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <input id="title" placeholder="Book title" /><br/>
+        <input id="author" placeholder="Book author" /><br/>
+        <input id="keptAt" placeholder="Book Kept At" /><br/>
+        <input id="total" type="number" placeholder="total book" /><br/>
+        <textarea id="barcodes" placeholder="enter barcode value separated by comma"></textarea><br/>
+        <button onclick="addBook()">Add Book</button>
+    </div>
+    <script>
+        var Admin = {};
+        var collage = "";
+        var UID = "";
+        window.onload = function() {
+
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (!user) {
+                    alert("you are not logged in...");
+                    location.replace("main_content.html");
+                } else {
+                    UID = user.uid;
+                    fetchAdminData();
+                }
+            });
+
+        }
+
+
+        function fetchAdminData() {
+            var db = firebase.firestore();
+
+            db.collection("admins").doc(UID).get().then(function(doc) {
+                console.log("Admin data: ", doc.data());
+                ADMIN = doc.data();
+                collage = ADMIN.collage;
+            });
+
+        }
+
+        function addBook() {
+            var bid = firebase.firestore().collection("collage").doc(collage).collection("other").doc("library")
+                .collection("book-detail").doc().id;
+
+            var bar = document.getElementById("barcodes").value;
+            barAr = bar.split(",");
+            var total = parseInt(document.getElementById("total").value);
+            var bookDetail = {
+                name: document.getElementById("title").value,
+                author: document.getElementById("author").value,
+                total: total,
+                available: total,
+                keptAt: document.getElementById("keptAt").value
+            };
+            if (collage != "" && barAr.length == total) {
+
+                var db1 = firebase.firestore().collection("collage").doc(collage).collection("other").doc("library")
+                    .collection("book-detail").doc(bid);
+                var db = firebase.firestore().collection("collage").doc(collage).collection("other").doc("library")
+                    .collection("all-book");
+                const batch = firebase.firestore().batch();
+                batch.set(db1, bookDetail);
+                for (a = 0; a < total; a++) {
+                    var sfRef = db.doc(barAr[a]);
+                    batch.set(sfRef, {
+                        bid: bid,
+                        issuedBy: "",
+                        date: new Date()
+                    });
+                }
+                batch.commit().then(function() {
+                    alert("New book added successfully");
+                });
+
+            } else {
+                alert("require bar code");
+            }
+        }
+    </script>
+</body>
+
+</html>

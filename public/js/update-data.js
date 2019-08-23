@@ -1,6 +1,8 @@
-var ADMIN = {};
 var lec = 0;
-var UID = "uid";
+var Admin = {};
+var collage = "";
+var UID = "";
+
 window.onload = function() {
 
     firebase.auth().onAuthStateChanged(function(user) {
@@ -13,6 +15,19 @@ window.onload = function() {
         }
     });
 
+}
+
+
+
+function fetchAdminData() {
+    var db = firebase.firestore();
+
+    db.collection("admins").doc(UID).get().then(function(doc) {
+        console.log("Admin data: ", doc.data());
+        ADMIN = doc.data();
+        collage = ADMIN.collage;
+        fetchTimingData();
+    });
 }
 
 function prepareUI() {
@@ -95,8 +110,6 @@ function getId(day, lec) {
 }
 
 function upload() {
-
-    var collage = ADMIN.collage;
     var branch = document.getElementById("branch").value;
     var batch = document.getElementById("batch").value;
     var year = document.getElementById("year").value;
@@ -119,6 +132,7 @@ function upload() {
         if (doc.exists) upload = doc.data();
 
         upload[type] = docData;
+        upload.lastUpdated = new Date();
         db.collection(dataroot).doc(batch).set(upload).then(function() {
             console.log("Document successfully written!");
             alert("success");
@@ -127,7 +141,6 @@ function upload() {
 }
 
 function fetch() {
-    var collage = ADMIN.collage;
     var branch = document.getElementById("branch").value;
     var batch = document.getElementById("batch").value;
     var year = document.getElementById("year").value;
@@ -154,19 +167,8 @@ function fetch() {
     });
 }
 
-function fetchAdminData() {
-    var db = firebase.firestore();
-
-    db.collection("admins").doc(UID).get().then(function(doc) {
-        console.log("Admin data: ", doc.data());
-        ADMIN = doc.data();
-        fetchTimingData();
-    });
-}
 
 function fetchTimingData() {
-
-    var collage = ADMIN.collage;
     var dataroot = "/collage/" + collage + "/other/";
     var db = firebase.firestore();
 
